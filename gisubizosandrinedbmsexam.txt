@@ -1,0 +1,475 @@
+QUESTION1:
+ 
+MariaDB [(none)]> create database company;
+Query OK, 1 row affected (0.005 sec)
+MariaDB [(none)]> use company;
+Database changed
+MariaDB [company]> create table client_master(ClientNO int primary key,Name varchar(255),Address varchar(255),City varchar(255),State varchar(255),bal_due varchar(255));
+Query OK, 0 rows affected (0.038 sec)
+
+MariaDB [company]> insert into client_master values(1,'gisubizo','rwanda','kigali','gasabo',1000);
+Query OK, 1 row affected (0.016 sec)
+
+MariaDB [company]> insert into client_master values(3,'soso','rwanda','east','rwamagana',4000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into client_master values(4,'manzi','rwanda','north','huye',4900);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into client_master values(5,'keza','rwanda','north','kamonyi',10000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into client_master values(6,'keza','uganda','south','kampala',8000);
+Query OK, 1 row affected (0.001 sec)
+
+QUESTION2:
+
+MariaDB [company]>
+MariaDB [company]> select name from client_master where bal_due>5000;
++------+
+| name |
++------+
+| keza |
+| keza |
++------+
+QUESTION3:
+
+2 rows in set (0.016 sec)
+MariaDB [company]> update client_master set clientno=5100 where clientno=5;
+Query OK, 1 row affected (0.018 sec)
+
+QUESTION4:
+
+MariaDB [company]> alter table client_master rename client12;
+Query OK, 0 rows affected (0.028 sec)
+
+QUESTION5:
+
+MariaDB [company]>MariaDB [company]> select bal_due as BALANCE FROM Client12;
++---------+
+| BALANCE |
++---------+
+| 1000    |
+| 4000    |
+| 4900    |
+| 10000   |
+| 8000    |
++---------+
+5 rows in set (0.001 sec)
+
+QUESTION3
+
+MariaDB [company]> update client12 set clientno=123 where clientno=5;
+Query OK, 0 rows affected (0.001 sec)
+Rows matched: 0  Changed: 0  Warnings: 
+MariaDB [company]> update client12 set clientno=5100 where clientno=123;
+Query OK, 0 rows affected (0.001 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+MariaDB [COMPANY]> SELECT* FROM CLIENT12;
++----------+----------+---------+--------+-----------+---------+
+| ClientNO | Name     | Address | City   | State     | bal_due |
++----------+----------+---------+--------+-----------+---------+
+|        1 | gisubizo | rwanda  | kigali | gasabo    | 1000    |
+|        3 | soso     | rwanda  | east   | rwamagana | 4000    |
+|        4 | manzi    | rwanda  | north  | huye      | 4900    |
+|     5100 | keza     | rwanda  | north  | kamonyi   | 10000   |
+|        6 | keza     | uganda  | south  | kampala   | 8000    |
++----------+----------+---------+--------+-----------+---------+
+5 rows in set (0.002 sec)
+
+QUESTION6(A):
+
+MariaDB [company]> create table DEPARTMENTS(dnumber int primary key,Departmentname varchar(255),city varchar(255),district varchar(255),salary int);
+Query OK, 0 rows affected (0.028 sec)
+
+MariaDB [company]> create table EMPLOYEES(enumber int primary key,epartment varchar(255),ename varchar(255),district varchar(255),salary int);
+Query OK, 0 rows affected (0.025 sec)
+MariaDB [company]> insert into DEPARTMENTS VALUES(1,'keza','uganda','south',8000);
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [company]> insert into DEPARTMENTS VALUES(2,'FINANCE','RWANDA','south',7000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into DEPARTMENTS VALUES(3,'IT','RWANDA','south',4000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into DEPARTMENTS VALUES(4,'SALES','RWANDA','south',6000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into DEPARTMENTS VALUES(5,'RESEARCH','RWANDA','south',6005);
+Query OK, 1 row affected (0.001 sec)
+MariaDB [company]> insert into employees VALUES(1,'keza','research','south',6005);
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [company]> insert into employees VALUES(2,'sales','manzi','south',6000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into employees VALUES(3,'it','kahuga','south',4000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into employees VALUES(4,'finance','alex','south',7000);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into employees VALUES(5,'keza','alex','south',8000);
+Query OK, 1 row affected (0.001 sec)
+MariaDB [COMPANY]> SELECT*FROM DEPARTMENTS;
++---------+----------------+--------+----------+--------+
+| dnumber | Departmentname | city   | district | salary |
++---------+----------------+--------+----------+--------+
+|       1 | keza           | uganda | south    |   8000 |
+|       2 | FINANCE        | RWANDA | south    |   7000 |
+|       3 | IT             | RWANDA | south    |   4000 |
+|       4 | SALES          | RWANDA | south    |   6000 |
+|       5 | RESEARCH       | RWANDA | south    |   6005 |
++---------+----------------+--------+----------+--------+
+5 rows in set (0.001 sec)
+MariaDB [company]> select* from employees;
++---------+-----------+----------+----------+--------+
+| enumber | epartment | ename    | district | salary |
++---------+-----------+----------+----------+--------+
+|       1 | keza      | research | south    |   6005 |
+|       2 | sales     | manzi    | south    |   6000 |
+|       3 | it        | kahuga   | south    |   4000 |
+|       4 | finance   | alex     | south    |   7000 |
+|       5 | keza      | alex     | south    |   8000 |
++---------+-----------+----------+----------+--------+
+5 rows in set (0.001 sec)
+
+QUESTION6(B):
+MariaDB [company]> desc employees;
++-----------+--------------+------+-----+---------+-------+
+| Field     | Type         | Null | Key | Default | Extra |
++-----------+--------------+------+-----+---------+-------+
+| enumber   | int(11)      | NO   | PRI | NULL    |       |
+| epartment | varchar(255) | YES  |     | NULL    |       |
+| ename     | varchar(255) | YES  |     | NULL    |       |
+| district  | varchar(255) | YES  |     | NULL    |       |
+| salary    | int(11)      | YES  |     | NULL    |       |
++-----------+--------------+------+-----+---------+-------+
+5 rows in set (0.037 sec)
+
+QUESTION6(C):
+MariaDB [company]>  select employees.ename,departments.departmentname from departments left outer join employees on departments.dnumber=employees.enumber;
++----------+----------------+
+| ename    | departmentname |
++----------+----------------+
+| research | keza           |
+| manzi    | FINANCE        |
+| kahuga   | IT             |
+| alex     | SALES          |
+| alex     | RESEARCH       |
++----------+----------------+
+5 rows in set (0.001 sec)
+
+QUESTION6(D):
+MariaDB [company]>  select employees.ename,departments.departmentname from departments right outer join employees on departments.dnumber=employees.enumber;
++----------+----------------+
+| ename    | departmentname |
++----------+----------------+
+| research | keza           |
+| manzi    | FINANCE        |
+| kahuga   | IT             |
+| alex     | SALES          |
+| alex     | RESEARCH       |
++----------+----------------+
+5 rows in set (0.001 sec)
+
+QUESTION6(E):
+MariaDB [COMPANY]> select avg(salary) from employees;
++-------------+
+| avg(salary) |
++-------------+
+|   6201.0000 |
++-------------+
+1 row in set (0.001 sec)
+MariaDB [COMPANY]> select * from employees group by salary having avg(salary)>6201;
++---------+-----------+-------+----------+--------+
+| enumber | epartment | ename | district | salary |
++---------+-----------+-------+----------+--------+
+|       4 | finance   | alex  | south    |   7000 |
+|       5 | keza      | alex  | south    |   8000 |
++---------+-----------+-------+----------+--------+
+2 rows in set (0.001 sec)s
+MariaDB [COMPANY]> select * from employees where Salary >6201;
++---------+-----------+-------+----------+--------+
+| enumber | epartment | ename | district | salary |
++---------+-----------+-------+----------+--------+
+|       4 | finance   | alex  | south    |   7000 |
+|       5 | keza      | alex  | south    |   8000 |
++---------+-----------+-------+----------+--------+
+2 rows in set (0.001 sec)
+QUESTION7:
+
+QUESTION 7(A):
+qMariaDB [company]> create table STUDENT(studentId int(5) primary key,fullnames varchar(25),gender varchar(6),age int(2),department varchar(30));
+Query OK, 0 rows affected (0.027 sec)
+
+QUESTION7(B):
+MariaDB [company]> CREATE VIEW students AS SELECT *from student;
+Query OK, 0 rows affected (0.028 sec)
+
+QUESTION7(C):
+
+MariaDB [company]> CREATE VIEW girls AS SELECT *from student where gender='female';
+Query OK, 0 rows affected (0.025 sec)
+
+QUESTION7(d):
+MariaDB [company]> CREATE VIEW listofboys AS SELECT *from student where gender='male';
+Query OK, 0 rows affected (0.025 sec)
+
+QUESTION7(e):
+MariaDB [company]> insert into students VALUES(56784,'keza_emacule','female',20,'bit');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into students VALUES(56754,'iranzi_noella','male',20,'acc');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into students VALUES(5644,'manzi_la','male',23,'finance');
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> insert into students VALUES(4544,'iyanikaga','male',16,'finance');
+Query OK, 1 row affected (0.001 sec)
+MariaDB [company]> select*from students;
++-----------+---------------+--------+------+------------+
+| studentId | fullnames     | gender | age  | department |
++-----------+---------------+--------+------+------------+
+|     56789 | keza_emacule  | female |   20 | bit        |
+|     56784 | keza_emacule  | female |   20 | bit        |
+|     56754 | iranzi_noella | male   |   20 | acc        |
+|      5644 | manzi_la      | male   |   23 | finance    |
+|      4544 | iyanikaga     | male   |   16 | finance    |
++-----------+---------------+--------+------+------------+
+5 rows in set (0.001 sec)
+
+QUESTION7(F):
+MariaDB [company]> delete from students where age<20;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [company]> select*from students;
++-----------+---------------+--------+------+------------+
+| studentId | fullnames     | gender | age  | department |
++-----------+---------------+--------+------+------------+
+|     56789 | keza_emacule  | female |   20 | bit        |
+|     56784 | keza_emacule  | female |   20 | bit        |
+|     56754 | iranzi_noella | male   |   20 | acc        |
+|      5644 | manzi_la      | male   |   23 | finance    |
++-----------+---------------+--------+------+------------+
+4 rows in set (0.001 sec)
+MariaDB [company]> select*from girls;
++-----------+--------------+--------+------+------------+
+| studentId | fullnames    | gender | age  | department |
++-----------+--------------+--------+------+------------+
+|     56789 | keza_emacule | female |   20 | bit        |
+|     56784 | keza_emacule | female |   20 | bit        |
++-----------+--------------+--------+------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [company]> select*from listofboys;
++-----------+---------------+--------+------+------------+
+| studentId | fullnames     | gender | age  | department |
++-----------+---------------+--------+------+------------+
+|     56754 | iranzi_noella | male   |   20 | acc        |
+|      5644 | manzi_la      | male   |   23 | finance    |
++-----------+---------------+--------+------+------------+
+2 rows in set (0.001 sec)
+
+QUESTION10:
+
+MariaDB [company]> create table sales(Sales_No int primary key,Salesname varchar(255),Branch varchar(255),Salesamount int,DOB date);
+Query OK, 0 rows affected (0.025 sec)
+MariaDB [company]> insert into sales VALUES(2,'iranzi_noella','huye',2047,'19-10-09');
+Query OK, 1 row affected (0.001 sec)
+MariaDB [company]> insert into sales VALUES(1,'manzi','kayonza',40,'19-10-12');
+Query OK, 1 row affected (0.001 sec)
+\MariaDB [company]> insert into sales VALUES(3,'elvin','gikomero',40,'20-06-30');
+Query OK, 1 row affected (0.001 sec)
+MariaDB [company]> insert into sales VALUES(4,'kalisa','kigali',40,'22-05-30');
+Query OK, 1 row affected (0.000 sec)
+
+MariaDB [company]> insert into sales VALUES(5,'kalisa','ngoma',460,'21-04-29');
+Query OK, 1 row affected (0.001 sec)
+MariaDB [company]> select*from sales;
++----------+---------------+----------+-------------+------------+
+| Sales_No | Salesname     | Branch   | Salesamount | DOB        |
++----------+---------------+----------+-------------+------------+
+|        1 | manzi         | kayonza  |          40 | 2019-10-12 |
+|        2 | iranzi_noella | huye     |        2047 | 2019-10-09 |
+|        3 | elvin         | gikomero |          40 | 2020-06-30 |
+|        4 | kalisa        | kigali   |          40 | 2022-05-30 |
+|        5 | kalisa        | ngoma    |         460 | 2021-04-29 |
++----------+---------------+----------+-------------+------------+
+5 rows in set (0.001 sec)
+
+
+
+MariaDB [company]> select avg(salesamount),branch from sales group by branch;
++------------------+----------+
+| avg(salesamount) | branch   |
++------------------+----------+
+|          40.0000 | gikomero |
+|        2047.0000 | huye     |
+|          40.0000 | kayonza  |
+|          40.0000 | kigali   |
+|         460.0000 | ngoma    |
++------------------+----------+
+5 rows in set (0.001 sec)
+
+MariaDB [company]>  select avg(salesamount),Sales_No Salesname,Branch,DOB from sales group by branch;
++------------------+-----------+----------+------------+
+| avg(salesamount) | Salesname | Branch   | DOB        |
++------------------+-----------+----------+------------+
+|          40.0000 |         3 | gikomero | 2020-06-30 |
+|        2047.0000 |         2 | huye     | 2019-10-09 |
+|          40.0000 |         1 | kayonza  | 2019-10-12 |
+|          40.0000 |         4 | kigali   | 2022-05-30 |
+|         460.0000 |         5 | ngoma    | 2021-04-29 |
++------------------+-----------+----------+------------+
+5 rows in set (0.001 sec)
+
+MariaDB [company]>
+MariaDB [company]> select sum(salesamount),branch from sales group by branch;
++------------------+----------+
+| sum(salesamount) | branch   |
++------------------+----------+
+|               40 | gikomero |
+|             2047 | huye     |
+|               40 | kayonza  |
+|               40 | kigali   |
+|              460 | ngoma    |
++------------------+----------+
+5 rows in set (0.001 sec)
+MariaDB [company]>  select sum(salesamount),Sales_No Salesname,Branch,DOB from sales group by branch;
++------------------+-----------+----------+------------+
+| sum(salesamount) | Salesname | Branch   | DOB        |
++------------------+-----------+----------+------------+
+|               40 |         3 | gikomero | 2020-06-30 |
+|             2047 |         2 | huye     | 2019-10-09 |
+|               40 |         1 | kayonza  | 2019-10-12 |
+|               40 |         4 | kigali   | 2022-05-30 |
+|              460 |         5 | ngoma    | 2021-04-29 |
++------------------+-----------+----------+------------+
+5 rows in set (0.002 sec)
+MariaDB [company]> select salesname,dob from sales where dob='2019-10-09';
++---------------+------------+
+| salesname     | dob        |
++---------------+------------+
+| iranzi_noella | 2019-10-09 |
++---------------+------------+
+1 row in set (0.001 sec)
+mysql> SELECT salesname, DOB FROM sales ORDER BY MONTH(DOB);
+
+MariaDB [company]> select salesname,dob from sales order by dob;
++---------------+------------+
+| salesname     | dob        |
++---------------+------------+
+| iranzi_noella | 2019-10-09 |
+| manzi         | 2019-10-12 |
+| elvin         | 2020-06-30 |
+| kalisa        | 2021-04-29 |
+| kalisa        | 2022-05-30 |
++---------------+------------+
+5 rows in set (0.001 sec)
+MariaDB [company]>  select salesname,dob from sales order by dob desc;
++---------------+------------+
+| salesname     | dob        |
++---------------+------------+
+| kalisa        | 2022-05-30 |
+| kalisa        | 2021-04-29 |
+| elvin         | 2020-06-30 |
+| manzi         | 2019-10-12 |
+| iranzi_noella | 2019-10-09 |
++---------------+------------+
+5 rows in set (0.001 sec)
+
+MariaDB [company]> select salesname,dob from sales where dob='21-10-09';
+Empty set (0.002 sec)
+MariaDB [company]>SELECT salesname, DOB FROM sales ORDER BY MONTH(DOB);
++---------------+------------+
+| salesname     | dob        |
++---------------+------------+
+| kalisa        | 2022-04-30 |
+| kalisa        | 2021-05-29 |
+| elvin         | 2020-06-30 |
+| manzi         | 2019-10-12 |
+| iranzi_noella | 2019-10-09 |
++---------------+------------+
+5 rows in set (0.001 sec) 
+
+QUESTION9:
+
+MariaDB [company]>
+MariaDB [emp]> create table employees(Employee_Id int,First_Name VARCHAR(255) ,Last_Name VARCHAR(255),Email VARCHAR(255),Phone_Number INT,Hire_Date DATE,Job_Id INT,Salary INT,Commission_Pct varchar(255),Manager_Id int,Department_Id int);
+Query OK, 0 rows affected (0.029 sec)
+
+MariaDB [emp]> insert into employees values(1,'keza','kaliza','kaliza230',0789876,'21-12-02',10,1000,'ggg',100,60);
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [emp]> insert into employees values(3,'keza','austin','kaliza230',0789876,'21-11-02',10,1000,'ggg',100,70);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [emp]> insert into employees values(4,'iranzi','austin','manzi23',07898764,'21-11-05',20,4800,'sesa',90,80);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [emp]> insert into employees values(5,'gisubizo','keli','keli23',07898567,'21-10-05',60,50000,'sesa',90,60);
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [emp]> insert into employees values(6,'tumu','sando','austin',078985677,'21-10-05',60,579,'sesa',90,50);
+Query OK, 1 row affected (0.001 sec)
+MariaDB [emp]> select*from employees;
++-------------+------------+-----------+-----------+--------------+------------+--------+--------+----------------+------------+---------------+
+| Employee_Id | First_Name | Last_Name | Email     | Phone_Number | Hire_Date  | Job_Id | Salary | Commission_Pct | Manager_Id | Department_Id |
++-------------+------------+-----------+-----------+--------------+------------+--------+--------+----------------+------------+---------------+
+|           1 | keza       | kaliza    | kaliza230 |       789876 | 2021-12-02 |     10 |   1000 | ggg            |        100 |            60 |
+|           3 | keza       | austin    | kaliza230 |       789876 | 2021-11-02 |     10 |   1000 | ggg            |        100 |            70 |
+|           4 | iranzi     | austin    | manzi23   |      7898764 | 2021-11-05 |     20 |   4800 | sesa           |         90 |            80 |
+|           5 | gisubizo   | keli      | keli23    |      7898567 | 2021-10-05 |     60 |  50000 | sesa           |         90 |            60 |
+|           6 | tumu       | sando     | austin    |     78985677 | 2021-10-05 |     60 |    579 | sesa           |         90 |            50 |
++-------------+------------+-----------+-----------+--------------+------------+--------+--------+----------------+------------+---------------+
+5 rows in set (0.001 sec)
+MariaDB [emp]> select employee_id,first_name,last_name,salary from employees;
++-------------+------------+-----------+--------+
+| employee_id | first_name | last_name | salary |
++-------------+------------+-----------+--------+
+|           1 | keza       | kaliza    |   1000 |
+|           3 | keza       | austin    |   1000 |
+|           4 | iranzi     | austin    |   4800 |
+|           5 | gisubizo   | keli      |  50000 |
+|           6 | tumu       | sando     |    579 |
++-------------+------------+-----------+--------+
+5 rows in set (0.001 sec)
+MariaDB [emp]> select *from employees where manager_id=100;
++-------------+------------+-----------+-----------+--------------+------------+--------+--------+----------------+------------+---------------+
+| Employee_Id | First_Name | Last_Name | Email     | Phone_Number | Hire_Date  | Job_Id | Salary | Commission_Pct | Manager_Id | Department_Id |
++-------------+------------+-----------+-----------+--------------+------------+--------+--------+----------------+------------+---------------+
+|           1 | keza       | kaliza    | kaliza230 |       789876 | 2021-12-02 |     10 |   1000 | ggg            |        100 |            60 |
+|           3 | keza       | austin    | kaliza230 |       789876 | 2021-11-02 |     10 |   1000 | ggg            |        100 |            70 |
++-------------+------------+-----------+-----------+--------------+------------+--------+--------+----------------+------------+---------------+
+2 rows in set (0.001 
+
+MariaDB [emp]> select first_name,last_name from employees where salary>=4800;
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| iranzi     | austin    |
+| gisubizo   | keli      |
++------------+-----------+
+2 rows in set (0.001 sec)
+
+MariaDB [emp]> select *from employees where last_name='austin';
++-------------+------------+-----------+-----------+--------------+------------+--------+--------+----------------+------------+---------------+
+| Employee_Id | First_Name | Last_Name | Email     | Phone_Number | Hire_Date  | Job_Id | Salary | Commission_Pct | Manager_Id | Department_Id |
++-------------+------------+-----------+-----------+--------------+------------+--------+--------+----------------+------------+---------------+
+|           3 | keza       | austin    | kaliza230 |       789876 | 2021-11-02 |     10 |   1000 | ggg            |        100 |            70 |
+|           4 | iranzi     | austin    | manzi23   |      7898764 | 2021-11-05 |     20 |   4800 | sesa           |         90 |            80 |
++-------------+------------+-----------+-----------+--------------+------------+--------+--------+----------------+------------+---------------+
+2 rows in set (0.001 sec)
+MariaDB [emp]> select first_name,last_name from employees where department_id in(60,70,80);
++------------+-----------+
+| first_name | last_name |
++------------+-----------+
+| keza       | kaliza    |
+| keza       | austin    |
+| iranzi     | austin    |
+| gisubizo   | keli      |
++------------+-----------+
+4 rows in set (0.001 sec)
